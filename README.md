@@ -10,14 +10,25 @@ Log errors with [Winston](https://github.com/winstonjs/winston).
 # Features
 
 - The [full format](#fullformatoptions) includes all properties
-- The [short format](#shortformatoptions) includes only the error's name,
-  message and stack
-- Includes the [stack trace](#stack) or not
-- Prevents Winston from modifying the error instance
+- The [short format](#shortformatoptions) includes only the error's `name`,
+  `message` and `stack`
+- The [stack trace](#stack) can be omitted or not
+
+Unlike Winston's default
+[error format](https://github.com/winstonjs/logform#errors):
+
+- The error instance is not modified
+- The error `name` is logged
+- The full format logs nested errors, including
+  [`cause`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause)
+  and aggregate
+  [`errors`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError)
+- The full format is [JSON-safe](https://github.com/ehmicky/safe-json-value)
+- The short format optionally logs the stack trace
 
 # Example
 
-Using the [full format](#fullformatoptions) with Winston.
+Using the [full format](#fullformatoptions).
 
 ```js
 import { createLogger, transports, format } from 'winston'
@@ -42,7 +53,7 @@ logger.error(error)
 // }
 ```
 
-Using the [short format](#shortformatoptions) with Winston.
+Using the [short format](#shortformatoptions).
 
 ```js
 import { createLogger, transports, format } from 'winston'
@@ -107,7 +118,7 @@ Returns a logger
 to [combine](https://github.com/winstonjs/winston#combining-formats) with
 [`format.simple()`](https://github.com/winstonjs/logform#simple) or
 [`format.cli()`](https://github.com/winstonjs/logform#cli). This logs only the
-error name, message and stack, making it useful with
+error `name`, `message` and `stack`, making it useful with
 [transports](https://github.com/winstonjs/winston#transports) like the
 [console](https://github.com/winstonjs/winston/blob/master/docs/transports.md#console-transport).
 
@@ -118,8 +129,8 @@ Errors should be logged using
 
 _Type_: `object | ((Error) => object)`
 
-Options are an object. They can be error-specific by using a function returning
-an object instead.
+The options object can be error-specific by passing a function returning it
+instead.
 
 ### stack
 
