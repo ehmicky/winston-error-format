@@ -14,22 +14,20 @@ test('Does not use the stack if "stack" is false', (t) => {
 
 test('"stack" option is deep', (t) => {
   const error = new Error('outer')
-  error.errors = [testError]
+  error.prop = testError
   const object = fullFormat(({ message }) => ({
     stack: message !== 'outer',
   })).transform(error)
   t.is(object.stack, undefined)
-  t.is(object.errors[0].stack, error.errors[0].stack)
+  t.is(object.prop.stack, error.prop.stack)
 })
 
-test('The "transform" option is applied', (t) => {
+test('"transform" option modifies the error', (t) => {
   t.is(
     fullFormat({
-      transform() {
-        return new TypeError('test')
-      },
-    }).transform(testError).name,
-    'TypeError',
+      transform: ({ message }) => new Error(`transformed ${message}`),
+    }).transform(testError).message,
+    `transformed ${testError.message}`,
   )
 })
 

@@ -8,8 +8,9 @@ import { applyOptions } from './options.js'
 // The full format sets `level` and all error properties.
 // It recurses on `errors` and additional properties.
 // It is meant for transports which operates on objects like `http`.
-export const toFullLogObject = function ({ error, level, options }) {
+export const toFullLogObject = function (error, options) {
   const object = serializeValue(error, [], options)
+  const { level } = applyOptions(error, options)
   return { ...object, level }
 }
 

@@ -3,7 +3,7 @@ import { format } from 'logform'
 import { LEVEL, MESSAGE } from 'triple-beam'
 
 import { toFullLogObject } from './full.js'
-import { applyOptions, validateOptions } from './options.js'
+import { validateOptions } from './options.js'
 import { toShortLogObject } from './short.js'
 
 export { validateOptions }
@@ -25,8 +25,7 @@ const formatFunc = function (method, options, value) {
   }
 
   deleteWinstonProps(value)
-  const { level, stack, error } = applyOptions(value, options)
-  const object = method({ error, level, stack, options })
+  const object = method(value, options)
   return { ...object, [LEVEL]: object.level }
 }
 
