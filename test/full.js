@@ -24,7 +24,7 @@ test('"stack" option is deep', (t) => {
 })
 
 each(
-  [({ message }) => new Error(`${message}.`), ({ message }) => `${message}.`],
+  [({ message }) => `${message}.`, ({ message }) => new Error(`${message}.`)],
   ({ title }, transform) => {
     test(`"transform" option is applied | ${title}`, (t) => {
       t.is(
