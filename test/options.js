@@ -20,12 +20,10 @@ each(
     })
 
     test(`Format options are not validated on format creation if dynamic | ${title}`, (t) => {
-      // eslint-disable-next-line max-nested-callbacks
       t.notThrows(format.bind(undefined, () => options))
     })
 
     test(`Format options are validated on format usage if dynamic | ${title}`, (t) => {
-      // eslint-disable-next-line max-nested-callbacks
       t.throws(format(() => options).transform.bind(undefined, testError))
     })
   },
