@@ -13,8 +13,8 @@ to log errors with Winston.
 
 # Features
 
-- The [full format](#baseerrorfullformat) includes all properties
-- The [short format](#baseerrorshortformat) includes only the error's name,
+- The [full format](#fullformatoptions) includes all properties
+- The [short format](#shortformatoptions) includes only the error's name,
   message and stack
 - Log [level](#level) and [verbosity](#stack) can be configured
 - Prevents Winston from modifying the error instance
@@ -23,7 +23,7 @@ to log errors with Winston.
 
 # Example
 
-Using the [full format](#baseerrorfullformat) with Winston.
+Using the [full format](#fullformatoptions) with Winston.
 
 ```js
 import { createLogger, transports, format } from 'winston'
@@ -34,21 +34,21 @@ const logger = createLogger({
   transports: [new transports.Http(httpOptions)],
 })
 
-const error = new Error('Could not read file.')
+const error = new ExampleError('Could not read file.')
 error.filePath = '/...'
 logger.error(error)
 // Sent via HTTP:
 // {
 //   level: 'error',
-//   name: 'InputError',
+//   name: 'ExampleError',
 //   message: 'Could not read file.',
-//   stack: `InputError: Could not read file.
+//   stack: `ExampleError: Could not read file.
 //     at ...`,
 //   filePath: '/...',
 // }
 ```
 
-Using the [short format](#baseerrorshortformat) with Winston.
+Using the [short format](#shortformatoptions) with Winston.
 
 ```js
 import { createLogger, transports, format } from 'winston'
@@ -59,10 +59,10 @@ const logger = createLogger({
   transports: [new transports.Console()],
 })
 
-const error = new Error('Could not read file.')
+const error = new ExampleError('Could not read file.')
 logger.error(error)
 // Printed on the console:
-// error: InputError: Could not read file.
+// error: ExampleError: Could not read file.
 //     at ...
 ```
 
