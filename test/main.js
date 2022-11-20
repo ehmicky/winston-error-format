@@ -92,3 +92,16 @@ each([shortLog, fullLog], ({ title }, doLog) => {
     t.deepEqual(valuesBefore, valuesAfter)
   })
 })
+
+each([shortFormat, fullFormat], ({ title }, specificFormat) => {
+  test(`Sets level to error by default | ${title}`, (t) => {
+    t.is(specificFormat().transform(testError).level, defaultLevel)
+  })
+
+  test(`Can set other level | ${title}`, (t) => {
+    t.is(
+      specificFormat({ level: testLevel }).transform(testError).level,
+      testLevel,
+    )
+  })
+})

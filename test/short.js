@@ -2,15 +2,7 @@ import test from 'ava'
 import { each } from 'test-each'
 import { shortFormat } from 'winston-error-format'
 
-import { defaultLevel, testLevel, testError } from './helpers/main.js'
-
-test('Sets level to error by default', (t) => {
-  t.is(shortFormat().transform(testError).level, defaultLevel)
-})
-
-test('Can set other level', (t) => {
-  t.is(shortFormat({ level: testLevel }).transform(testError).level, testLevel)
-})
+import { testError } from './helpers/main.js'
 
 test('Does not use the stack if "stack" is false', (t) => {
   t.is(

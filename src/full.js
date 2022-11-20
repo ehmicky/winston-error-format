@@ -26,8 +26,8 @@ const serializeError = function (value, options) {
     return value
   }
 
-  const { stack: stackOpt } = applyOptions(value, options)
-  const object = serialize(value, { shallow: true })
+  const { stack: stackOpt, error } = applyOptions(value, options)
+  const object = serialize(error, { shallow: true })
 
   if (stackOpt) {
     return object

@@ -2,7 +2,7 @@ import test from 'ava'
 import { LEVEL } from 'triple-beam'
 import { fullFormat } from 'winston-error-format'
 
-import { defaultLevel, testLevel, testError } from './helpers/main.js'
+import { defaultLevel, testError } from './helpers/main.js'
 
 test('Does not use the stack if "stack" is false', (t) => {
   t.false('stack' in fullFormat({ stack: false }).transform(testError))
@@ -20,14 +20,6 @@ test('"stack" option is deep', (t) => {
   })).transform(error)
   t.is(object.stack, undefined)
   t.is(object.errors[0].stack, error.errors[0].stack)
-})
-
-test('Can set other level', (t) => {
-  t.is(fullFormat({ level: testLevel }).transform(testError).level, testLevel)
-})
-
-test('Sets level to error by default', (t) => {
-  t.is(fullFormat().transform(testError).level, defaultLevel)
 })
 
 test('The "transform" option is applied', (t) => {
