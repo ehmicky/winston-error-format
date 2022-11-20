@@ -62,3 +62,11 @@ expectNotAssignable<Options>({
 expectError(fullFormat({ transform: (error: true) => error }))
 expectError(shortFormat({ transform: (error: true) => error }))
 expectNotAssignable<Options>({ transform: (error: true) => error })
+
+fullFormat(() => ({}))
+shortFormat(() => ({}))
+expectNotAssignable<Options>(() => ({}))
+fullFormat(() => ({ stack: true }))
+shortFormat(() => ({ stack: true }))
+expectError(fullFormat(() => ({ stack: 'true' })))
+expectError(shortFormat(() => ({ stack: 'true' })))

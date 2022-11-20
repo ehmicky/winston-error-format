@@ -30,6 +30,11 @@ export interface Options {
 }
 
 /**
+ *
+ */
+type DynamicOptions = Options | ((error: Error) => Options)
+
+/**
  * Returns a logger
  * [`format`](https://github.com/winstonjs/winston/blob/master/README.md#formats)
  * to [combine](https://github.com/winstonjs/winston#combining-formats) with
@@ -58,7 +63,7 @@ export interface Options {
  * //     at ...
  * ```
  */
-export function shortFormat(options?: Options): Format
+export function shortFormat(options?: DynamicOptions): Format
 
 /**
  * Returns a logger
@@ -95,4 +100,4 @@ export function shortFormat(options?: Options): Format
  * // }
  * ```
  */
-export function fullFormat(options?: Options): Format
+export function fullFormat(options?: DynamicOptions): Format
