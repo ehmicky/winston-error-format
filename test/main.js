@@ -8,7 +8,7 @@ import { shortFormat, fullFormat } from 'winston-error-format'
 
 import { testError, defaultLevel, testLevel } from './helpers/main.js'
 
-const shortLog = function (value, options) {
+const shortLog = function (value, options, level = defaultLevel) {
   // eslint-disable-next-line fp/no-let
   let lastLog = ''
   const stream = through.obj((object, encoding, done) => {
@@ -20,11 +20,11 @@ const shortLog = function (value, options) {
     format: format.combine(shortFormat(options), format.simple()),
     transports: [new transports.Stream({ stream })],
   })
-  logger.error(value)
+  logger[level](value)
   return lastLog
 }
 
-const fullLog = function (value, options) {
+const fullLog = function (value, options, level = defaultLevel) {
   // eslint-disable-next-line fp/no-let
   let lastLog = {}
   const stream = through.obj((object, encoding, done) => {
@@ -36,20 +36,20 @@ const fullLog = function (value, options) {
     format: format.combine(fullFormat(options), format.json()),
     transports: [new transports.Stream({ stream })],
   })
-  logger.error(value)
+  logger[level](value)
   return lastLog
 }
 
 test('Log stack-less errors with shortFormat', (t) => {
   t.is(
-    shortLog(testError, { stack: false, level: testLevel }),
-    `${testLevel}: ${testError.name}: ${testError.message}`,
+    shortLog(testError, { stack: false }),
+    `${defaultLevel}: ${testError.name}: ${testError.message}`,
   )
 })
 
 test('Log stack-less errors with fullFormat', (t) => {
-  t.deepEqual(fullLog(testError, { stack: false, level: testLevel }), {
-    level: testLevel,
+  t.deepEqual(fullLog(testError, { stack: false }), {
+    level: defaultLevel,
     name: testError.name,
     message: testError.message,
   })
@@ -78,17 +78,20 @@ test('Log non-errors with fullFormat', (t) => {
   t.deepEqual(fullLog(message), { level: defaultLevel, message })
 })
 
-each([shortFormat, fullFormat], ({ title }, specificFormat) => {
-  test(`Sets level to error by default | ${title}`, (t) => {
-    t.is(specificFormat().transform(testError).level, defaultLevel)
-  })
+test('Keep level by default with shortFormat', (t) => {
+  t.true(shortLog(testError, {}, testLevel).startsWith(testLevel))
+})
 
-  test(`Can set other level | ${title}`, (t) => {
-    t.is(
-      specificFormat({ level: testLevel }).transform(testError).level,
-      testLevel,
-    )
-  })
+test('Keep level by default with fullFormat', (t) => {
+  t.is(fullLog(testError, {}, testLevel).level, testLevel)
+})
+
+test('Can override level with shortFormat', (t) => {
+  t.true(shortLog(testError, { level: testLevel }).startsWith(testLevel))
+})
+
+test('Can override level with fullFormat', (t) => {
+  t.is(fullLog(testError, { level: testLevel }).level, testLevel)
 })
 
 each([shortLog, fullLog], ({ title }, doLog) => {

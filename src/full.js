@@ -8,26 +8,31 @@ import { applyOptions } from './options.js'
 // The full format sets `level` and all error properties.
 // It recurses on `errors` and additional properties.
 // It is meant for transports which operates on objects like `http`.
-export const toFullLogObject = function (error, options) {
-  const object = serializeValue(error, [], options)
-  const { level } = applyOptions(error, options)
-  return { ...object, level }
+export const toFullLogObject = function (error, level, options) {
+  const object = serializeValue({ value: error, parents: [], level, options })
+  const { level: levelA } = applyOptions(error, level, options)
+  return { ...object, level: levelA }
 }
 
-const serializeValue = function (value, parents, options) {
+const serializeValue = function ({ value, parents, level, options }) {
   const parentsA = [...parents, value]
-  const valueA = serializeError(value, options)
-  const valueB = serializeRecurse(valueA, parentsA, options)
+  const valueA = serializeError(value, level, options)
+  const valueB = serializeRecurse({
+    value: valueA,
+    parents: parentsA,
+    level,
+    options,
+  })
   const valueC = safeJsonValue(valueB, { shallow: true }).value
   return valueC
 }
 
-const serializeError = function (value, options) {
+const serializeError = function (value, level, options) {
   if (!isErrorInstance(value)) {
     return value
   }
 
-  const { stack: stackOpt, error } = applyOptions(value, options)
+  const { stack: stackOpt, error } = applyOptions(value, level, options)
   const object = serialize(error, { shallow: true })
 
   if (stackOpt) {
@@ -39,11 +44,11 @@ const serializeError = function (value, options) {
   return objectA
 }
 
-const serializeRecurse = function (value, parents, options) {
+const serializeRecurse = function ({ value, parents, level, options }) {
   if (Array.isArray(value)) {
     return value
       .filter((child) => !parents.includes(child))
-      .map((child) => serializeValue(child, parents, options))
+      .map((child) => serializeValue({ value: child, parents, level, options }))
   }
 
   if (isPlainObj(value)) {
@@ -52,7 +57,7 @@ const serializeRecurse = function (value, parents, options) {
         .filter((propName) => !parents.includes(value[propName]))
         .map((propName) => [
           propName,
-          serializeValue(value[propName], parents, options),
+          serializeValue({ value: value[propName], parents, level, options }),
         ]),
     )
   }

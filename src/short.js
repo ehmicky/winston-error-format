@@ -5,10 +5,14 @@ import { applyOptions } from './options.js'
 // `errors` and additional properties are ignored.
 // It is meant for transports which operates on strings like `console`.
 // We make sure to return new objects since `logform` directly mutates.
-export const toShortLogObject = function (error, options) {
-  const { level, stack, error: errorA } = applyOptions(error, options)
+export const toShortLogObject = function (error, level, options) {
+  const {
+    level: levelA,
+    stack,
+    error: errorA,
+  } = applyOptions(error, level, options)
   const message = getShortMessage(errorA, stack)
-  return { level, message }
+  return { level: levelA, message }
 }
 
 const getShortMessage = function ({ name, message, stack }, stackOpt) {

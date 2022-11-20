@@ -4,17 +4,17 @@ import { configs } from 'triple-beam'
 
 // We do not allow setting Winston options or transport options, since this is
 // not very useful and can be achieved with level filtering.
-export const applyOptions = function (error, options = {}) {
+export const applyOptions = function (error, level, options = {}) {
   const optionsA = typeof options === 'function' ? options(error) : options
   validateOptions(optionsA)
-  const { level = DEFAULT_LEVEL, stack = DEFAULT_STACK, transform } = optionsA
+  const { level: levelA = level, stack = DEFAULT_STACK, transform } = optionsA
   const errorA =
     transform === undefined ? error : normalizeException(transform(error))
-  return { level, stack, error: errorA }
+  return { level: levelA, stack, error: errorA }
 }
 
 // The default level must exist in all of `triple-beam.configs.*`
-const DEFAULT_LEVEL = 'error'
+export const DEFAULT_LEVEL = 'error'
 const DEFAULT_STACK = true
 
 export const validateOptions = function (options = {}) {

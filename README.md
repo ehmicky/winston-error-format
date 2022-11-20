@@ -101,7 +101,7 @@ logs all error properties, making it useful with
 [HTTP](https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport).
 
 Errors should be logged using
-[`logger.error(error)`](https://github.com/winstonjs/winston/blob/master/README.md#creating-your-own-logger).
+[`logger.*(error)`](https://github.com/winstonjs/winston/blob/master/README.md#creating-your-own-logger).
 
 ## shortFormat(options?)
 
@@ -118,7 +118,7 @@ error name, message and stack, making it useful with
 [console](https://github.com/winstonjs/winston/blob/master/docs/transports.md#console-transport).
 
 Errors should be logged using
-[`logger.error(error)`](https://github.com/winstonjs/winston/blob/master/README.md#creating-your-own-logger).
+[`logger.*(error)`](https://github.com/winstonjs/winston/blob/master/README.md#creating-your-own-logger).
 
 ## Options
 
