@@ -22,12 +22,40 @@ test('"stack" option is deep', (t) => {
   t.is(object.prop.stack, error.prop.stack)
 })
 
-test('"transform" option modifies the error', (t) => {
+test('"transform" option is applied', (t) => {
   t.is(
     fullFormat({
-      transform: ({ message }) => new Error(`transformed ${message}`),
+      transform({ message }) {
+        return new Error(`${message}.`)
+      },
     }).transform(testError).message,
-    `transformed ${testError.message}`,
+    `${testError.message}.`,
+  )
+})
+
+test('"transform" option is applied deeply', (t) => {
+  const outerError = new Error('outer')
+  // eslint-disable-next-line fp/no-mutation
+  outerError.prop = testError
+  t.is(
+    fullFormat({
+      transform(error) {
+        return error === outerError ? error : new Error('inner')
+      },
+    }).transform(outerError).prop.message,
+    'inner',
+  )
+})
+
+test('"transform" option is applied only once', (t) => {
+  t.is(
+    fullFormat({
+      transform(error) {
+        error.message += '.'
+        return error
+      },
+    }).transform(new Error(testError.message)).message,
+    `${testError.message}.`,
   )
 })
 
@@ -63,4 +91,13 @@ test('Serializes aggregate errors deeply', (t) => {
   const error = new Error('test')
   error.errors = [testError]
   t.is(fullFormat().transform(error).errors[0].message, error.errors[0].message)
+})
+
+test('Avoid infinite recursion', (t) => {
+  const error = new Error('test')
+  error.prop = error
+  error.errors = [error]
+  const { prop, errors } = fullFormat().transform(error)
+  t.is(prop, undefined)
+  t.is(errors.length, 0)
 })
