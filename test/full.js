@@ -4,12 +4,12 @@ import { fullFormat } from 'winston-error-format'
 
 import { defaultLevel, testError } from './helpers/main.js'
 
-test('Does not use the stack if "stack" is false', (t) => {
-  t.false('stack' in fullFormat({ stack: false }).transform(testError))
-})
-
 test('Use the stack by default', (t) => {
   t.is(fullFormat().transform(testError).stack, testError.stack)
+})
+
+test('Does not use the stack if "stack" is false', (t) => {
+  t.false('stack' in fullFormat({ stack: false }).transform(testError))
 })
 
 test('"stack" option is deep', (t) => {
