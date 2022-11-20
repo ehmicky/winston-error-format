@@ -10,18 +10,18 @@ export type { Format }
  */
 export interface Options {
   /**
-   * Log [level](https://github.com/winstonjs/winston#logging-levels).
-   *
-   * @default 'error'
-   */
-  readonly level?: string
-
-  /**
    * Whether to log the stack trace.
    *
    * @default `true`
    */
   readonly stack?: boolean
+
+  /**
+   * Log [level](https://github.com/winstonjs/winston#logging-levels).
+   *
+   * @default 'error'
+   */
+  readonly level?: string
 
   /**
    *

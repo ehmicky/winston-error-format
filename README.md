@@ -16,7 +16,7 @@ to log errors with Winston.
 - The [full format](#fullformatoptions) includes all properties
 - The [short format](#shortformatoptions) includes only the error's name,
   message and stack
-- Log [level](#level) and [verbosity](#stack) can be configured
+- Includes the [stack trace](#stack) or not
 - Prevents Winston from modifying the error instance
 - Works with
   [uncaught exceptions](https://github.com/winstonjs/winston#exceptions)
@@ -127,19 +127,24 @@ _Type_: `object | ((Error) => object)`
 Options are an object. They can be error-specific by using a function returning
 an object instead.
 
-### level
-
-_Type_: `string`\
-_Default_: `'error'`
-
-Log [level](https://github.com/winstonjs/winston#logging-levels).
-
 ### stack
 
 _Type_: `boolean`\
 _Default_: `true`
 
 Whether to log the stack trace.
+
+### level
+
+_Type_: `string`
+
+Override the log [level](https://github.com/winstonjs/winston#logging-levels).
+
+### transform
+
+_Type_: `(Error) => Error`
+
+Maps the `error` before logging it.
 
 # Related projects
 
