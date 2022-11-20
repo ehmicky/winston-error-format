@@ -10,7 +10,7 @@ Log errors with [Winston](https://github.com/winstonjs/winston).
 # Features
 
 This provides with two Winston
-[formats](https://github.com/winstonjs/winston/blob/master/README.md#formats).
+[formats](https://github.com/winstonjs/winston/blob/master/README.md#formats):
 
 - [Full](#fullformatoptions): includes all properties
 - [Short](#shortformatoptions): includes only the error's `name`, `message` and
@@ -19,7 +19,6 @@ This provides with two Winston
 Unlike Winston's default
 [error format](https://github.com/winstonjs/logform#errors):
 
-- The error instance is not modified
 - The error `name` is logged
 - The full format logs nested errors, including
   [`cause`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause)
@@ -27,6 +26,7 @@ Unlike Winston's default
   [`errors`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError)
 - The full format is [JSON-safe](https://github.com/ehmicky/safe-json-value)
 - The short format optionally logs the stack trace
+- The error instance is not modified
 
 # Example
 
