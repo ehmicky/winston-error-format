@@ -7,10 +7,11 @@ import { testError } from './helpers/main.js'
 each(
   [
     true,
-    { unknown: true },
     { level: true },
     { level: 'unknown' },
     { stack: 'true' },
+    { transform: true },
+    { unknown: true },
   ],
   [shortFormat, fullFormat],
   ({ title }, options, format) => {

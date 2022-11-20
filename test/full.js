@@ -1,4 +1,5 @@
 import test from 'ava'
+import { each } from 'test-each'
 import { LEVEL } from 'triple-beam'
 import { fullFormat } from 'winston-error-format'
 
@@ -12,26 +13,27 @@ test('Does not use the stack if "stack" is false', (t) => {
   t.false('stack' in fullFormat({ stack: false }).transform(testError))
 })
 
+const isInnerErrorOptions = ({ message }) => ({ stack: message !== 'outer' })
+
 test('"stack" option is deep', (t) => {
   const error = new Error('outer')
   error.prop = testError
-  const object = fullFormat(({ message }) => ({
-    stack: message !== 'outer',
-  })).transform(error)
+  const object = fullFormat(isInnerErrorOptions).transform(error)
   t.is(object.stack, undefined)
   t.is(object.prop.stack, error.prop.stack)
 })
 
-test('"transform" option is applied', (t) => {
-  t.is(
-    fullFormat({
-      transform({ message }) {
-        return new Error(`${message}.`)
-      },
-    }).transform(testError).message,
-    `${testError.message}.`,
-  )
-})
+each(
+  [({ message }) => new Error(`${message}.`), ({ message }) => `${message}.`],
+  ({ title }, transform) => {
+    test(`"transform" option is applied | ${title}`, (t) => {
+      t.is(
+        fullFormat({ transform }).transform(testError).message,
+        `${testError.message}.`,
+      )
+    })
+  },
+)
 
 test('"transform" option is applied deeply', (t) => {
   const outerError = new Error('outer')

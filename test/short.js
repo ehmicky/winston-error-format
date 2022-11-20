@@ -26,3 +26,24 @@ each(['name', 'message'], ({ title }, propName) => {
     )
   })
 })
+
+test('Can use dynamic options', (t) => {
+  t.is(
+    shortFormat(() => ({ stack: false })).transform(testError).message,
+    `${testError.name}: ${testError.message}`,
+  )
+})
+
+each(
+  [({ message }) => new Error(`${message}.`), ({ message }) => `${message}.`],
+  ({ title }, transform) => {
+    const options = () => ({ stack: false, transform })
+
+    test(`"transform" option is applied | ${title}`, (t) => {
+      t.is(
+        shortFormat(options).transform(testError).message,
+        `${testError.name}: ${testError.message}.`,
+      )
+    })
+  },
+)
