@@ -7,10 +7,6 @@
 
 Log errors with [Winston](https://github.com/winstonjs/winston).
 
-This provides with two
-[Winston formats](https://github.com/winstonjs/winston/blob/master/README.md#formats)
-to log errors with Winston.
-
 # Features
 
 - The [full format](#fullformatoptions) includes all properties
@@ -18,8 +14,6 @@ to log errors with Winston.
   message and stack
 - Includes the [stack trace](#stack) or not
 - Prevents Winston from modifying the error instance
-- Works with
-  [uncaught exceptions](https://github.com/winstonjs/winston#exceptions)
 
 # Example
 
