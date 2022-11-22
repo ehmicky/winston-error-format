@@ -1,7 +1,7 @@
-import templateName, { Options } from 'template-name'
+import winstonErrorFormat, { Options } from 'winston-error-format'
 import { expectType, expectAssignable } from 'tsd'
 
-expectType<object>(templateName(true))
+expectType<object>(winstonErrorFormat(true))
 
-templateName(true, {})
+winstonErrorFormat(true, {})
 expectAssignable<Options>({})

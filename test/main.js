@@ -1,6 +1,6 @@
 import test from 'ava'
-import templateName from 'template-name'
+import winstonErrorFormat from 'winston-error-format'
 
 test('Dummy test', (t) => {
-  t.true(templateName(true))
+  t.true(winstonErrorFormat(true))
 })
