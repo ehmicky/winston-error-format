@@ -9,10 +9,12 @@ Log errors with [Winston](https://github.com/winstonjs/winston).
 
 # Features
 
-- The [full format](#fullformatoptions) includes all properties
-- The [short format](#shortformatoptions) includes only the error's `name`,
-  `message` and `stack`
-- The [stack trace](#stack) can be omitted or not
+This provides with two Winston
+[formats](https://github.com/winstonjs/winston/blob/master/README.md#formats).
+
+- [Full](#fullformatoptions): includes all properties
+- [Short](#shortformatoptions): includes only the error's `name`, `message` and
+  `stack`
 
 Unlike Winston's default
 [error format](https://github.com/winstonjs/logform#errors):
