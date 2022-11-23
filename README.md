@@ -155,8 +155,8 @@ Maps the `error` before logging it.
 
 # Related projects
 
-- [`modern-errors`](https://github.com/ehmicky/modern-errors): Handle errors
-  like it's 2023 🔮
+- [`modern-errors`](https://github.com/ehmicky/modern-errors): Handle errors in
+  a simple, stable, consistent way
 - [`modern-errors-winston`](https://github.com/ehmicky/modern-errors-winston):
   Log errors with Winston
 - [`error-custom-class`](https://github.com/ehmicky/error-custom-class): Create
