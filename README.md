@@ -155,6 +155,8 @@ Maps the `error` before logging it.
 
 # Related projects
 
+- [`winston`](https://github.com/winstonjs/winston): A logger for just about
+  everything
 - [`modern-errors`](https://github.com/ehmicky/modern-errors): Handle errors in
   a simple, stable, consistent way
 - [`modern-errors-winston`](https://github.com/ehmicky/modern-errors-winston):
