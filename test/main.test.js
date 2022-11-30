@@ -6,7 +6,7 @@ import { MESSAGE } from 'triple-beam'
 import { createLogger, transports, format } from 'winston'
 import { shortFormat, fullFormat } from 'winston-error-format'
 
-import { testError, defaultLevel, testLevel } from './helpers/main.js'
+import { testError, defaultLevel, testLevel } from './helpers/main.test.js'
 
 const shortLog = function (value, options, level = defaultLevel) {
   // eslint-disable-next-line fp/no-let

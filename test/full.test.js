@@ -3,7 +3,7 @@ import { each } from 'test-each'
 import { LEVEL } from 'triple-beam'
 import { fullFormat } from 'winston-error-format'
 
-import { defaultLevel, testError } from './helpers/main.js'
+import { defaultLevel, testError } from './helpers/main.test.js'
 
 test('Use the stack by default', (t) => {
   t.is(fullFormat().transform(testError).stack, testError.stack)

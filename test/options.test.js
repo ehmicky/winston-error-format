@@ -2,7 +2,7 @@ import test from 'ava'
 import { each } from 'test-each'
 import { shortFormat, fullFormat, validateOptions } from 'winston-error-format'
 
-import { testError } from './helpers/main.js'
+import { testError } from './helpers/main.test.js'
 
 each(
   [
