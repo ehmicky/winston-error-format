@@ -34,6 +34,7 @@ Using the [full format](#fullformatoptions).
 
 ```js
 import { createLogger, transports, format } from 'winston'
+
 import { fullFormat } from 'winston-error-format'
 
 const logger = createLogger({
@@ -59,6 +60,7 @@ Using the [short format](#shortformatoptions).
 
 ```js
 import { createLogger, transports, format } from 'winston'
+
 import { shortFormat } from 'winston-error-format'
 
 const logger = createLogger({

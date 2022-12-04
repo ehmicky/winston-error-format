@@ -1,6 +1,12 @@
 import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
 import { createLogger } from 'winston'
-import { shortFormat, fullFormat, Format, Options } from 'winston-error-format'
+
+import {
+  shortFormat,
+  fullFormat,
+  type Format,
+  type Options,
+} from 'winston-error-format'
 
 const fFormat = fullFormat()
 const sFormat = shortFormat()
