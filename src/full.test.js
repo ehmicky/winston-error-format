@@ -42,9 +42,7 @@ test('"transform" option is applied deeply', (t) => {
   outerError.prop = testError
   t.is(
     fullFormat({
-      transform(error) {
-        return error === outerError ? error : new Error('inner')
-      },
+      transform: (error) => (error === outerError ? error : new Error('inner')),
     }).transform(outerError).prop.message,
     'inner',
   )
@@ -53,7 +51,7 @@ test('"transform" option is applied deeply', (t) => {
 test('"transform" option is applied only once', (t) => {
   t.is(
     fullFormat({
-      transform(error) {
+      transform: (error) => {
         error.message += '.'
         return error
       },

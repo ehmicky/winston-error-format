@@ -8,13 +8,13 @@ import { applyOptions } from './options.js'
 // The full format sets `level` and all error properties.
 // It recurses on `errors` and additional properties.
 // It is meant for transports which operates on objects like `http`.
-export const toFullLogObject = function (error, level, options) {
+export const toFullLogObject = (error, level, options) => {
   const object = serializeValue({ value: error, parents: [], level, options })
   const { level: levelA } = applyOptions(error, level, options)
   return { ...object, level: levelA }
 }
 
-const serializeValue = function ({ value, parents, level, options }) {
+const serializeValue = ({ value, parents, level, options }) => {
   const parentsA = [...parents, value]
   const valueA = serializeError(value, level, options)
   const valueB = serializeRecurse({
@@ -27,7 +27,7 @@ const serializeValue = function ({ value, parents, level, options }) {
   return valueC
 }
 
-const serializeError = function (value, level, options) {
+const serializeError = (value, level, options) => {
   if (!isErrorInstance(value)) {
     return value
   }
@@ -44,7 +44,7 @@ const serializeError = function (value, level, options) {
   return objectA
 }
 
-const serializeRecurse = function ({ value, parents, level, options }) {
+const serializeRecurse = ({ value, parents, level, options }) => {
   if (Array.isArray(value)) {
     return value
       .filter((child) => !parents.includes(child))

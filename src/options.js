@@ -4,7 +4,7 @@ import { configs } from 'triple-beam'
 
 // We do not allow setting Winston options or transport options, since this is
 // not very useful and can be achieved with level filtering.
-export const applyOptions = function (error, level, options = {}) {
+export const applyOptions = (error, level, options = {}) => {
   const optionsA = typeof options === 'function' ? options(error) : options
   validateOptions(optionsA)
   const { level: levelA = level, stack = DEFAULT_STACK, transform } = optionsA
@@ -17,7 +17,7 @@ export const applyOptions = function (error, level, options = {}) {
 export const DEFAULT_LEVEL = 'error'
 const DEFAULT_STACK = true
 
-export const validateOptions = function (options = {}) {
+export const validateOptions = (options = {}) => {
   if (!isPlainObj(options)) {
     throw new TypeError(`It must be a plain object: ${options}`)
   }
@@ -31,7 +31,7 @@ export const validateOptions = function (options = {}) {
 
 // The `level` option decides the log level for a specific error instance or
 // class. It defaults to `error`.
-const validateLevel = function (level) {
+const validateLevel = (level) => {
   if (level === undefined) {
     return
   }
@@ -49,23 +49,20 @@ const validateLevel = function (level) {
   }
 }
 
-const getAvailableLevels = function () {
-  return new Set(
+const getAvailableLevels = () =>
+  new Set(
     Reflect.ownKeys(configs).flatMap((name) =>
       getAvailableLevel(configs[name]),
     ),
   )
-}
 
-const getAvailableLevel = function ({ levels }) {
-  return Object.keys(levels)
-}
+const getAvailableLevel = ({ levels }) => Object.keys(levels)
 
 const LEVELS = getAvailableLevels()
 
 // The `stack` boolean option decides whether to log stack traces.
 // It defaults to `true`.
-const validateStack = function (stack) {
+const validateStack = (stack) => {
   if (stack !== undefined && typeof stack !== 'boolean') {
     throw new TypeError(`Option "stack" must be a boolean: ${stack}`)
   }
@@ -73,13 +70,13 @@ const validateStack = function (stack) {
 
 // The `transform` option allows transforming the error
 // It defaults to `true`.
-const validateTransform = function (transform) {
+const validateTransform = (transform) => {
   if (transform !== undefined && typeof transform !== 'function') {
     throw new TypeError(`Option "transform" must be a function: ${transform}`)
   }
 }
 
-const validateUnknownOpts = function (unknownOpts) {
+const validateUnknownOpts = (unknownOpts) => {
   const [unknownOpt] = Object.keys(unknownOpts)
 
   if (unknownOpt !== undefined) {

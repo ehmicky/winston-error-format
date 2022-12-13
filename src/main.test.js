@@ -9,7 +9,7 @@ import { testError, defaultLevel, testLevel } from './helpers/main.test.js'
 
 import { shortFormat, fullFormat } from 'winston-error-format'
 
-const shortLog = function (value, options, level = defaultLevel) {
+const shortLog = (value, options, level = defaultLevel) => {
   // eslint-disable-next-line fp/no-let
   let lastLog = ''
   const stream = through.obj((object, encoding, done) => {
@@ -25,7 +25,7 @@ const shortLog = function (value, options, level = defaultLevel) {
   return lastLog
 }
 
-const fullLog = function (value, options, level = defaultLevel) {
+const fullLog = (value, options, level = defaultLevel) => {
   // eslint-disable-next-line fp/no-let
   let lastLog = {}
   const stream = through.obj((object, encoding, done) => {

@@ -11,7 +11,7 @@ export { validateOptions }
 // Retrieve each Winston format.
 // We do not include any logic that is already available in default formats
 // like `json`, `prettyPrint`, `simple` or `cli`.
-const getFormat = function (method, options) {
+const getFormat = (method, options) => {
   if (options !== undefined && typeof options !== 'function') {
     validateOptions(options)
   }
@@ -19,7 +19,7 @@ const getFormat = function (method, options) {
   return format(formatFunc.bind(undefined, method, options))()
 }
 
-const formatFunc = function (method, options, value) {
+const formatFunc = (method, options, value) => {
   if (!isErrorInstance(value)) {
     return value
   }
@@ -31,7 +31,7 @@ const formatFunc = function (method, options, value) {
 }
 
 // Winston directly mutates `log()` argument, which we remove
-const deleteWinstonProps = function (value) {
+const deleteWinstonProps = (value) => {
   WINSTON_PROPS.forEach((propName) => {
     // eslint-disable-next-line fp/no-delete, no-param-reassign
     delete value[propName]
