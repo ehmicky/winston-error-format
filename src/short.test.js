@@ -19,8 +19,7 @@ test('Does not use the stack if "stack" is false', (t) => {
 each(['name', 'message'], ({ title }, propName) => {
   test(`Use the prepended stack if it misses the name or message | ${title}`, (t) => {
     const error = new Error('message')
-    // TODO: use string.replaceAll() after dropping support for Node <15.0.0
-    error.stack = error.stack.replace(new RegExp(error[propName], 'gu'), '')
+    error.stack = error.stack.replaceAll(error[propName], '')
     t.is(
       shortFormat().transform(error).message,
       `${error.name}: ${error.message}\n${error.stack}`,
