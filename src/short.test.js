@@ -1,9 +1,9 @@
 import test from 'ava'
 import { each } from 'test-each'
+import { shortFormat } from 'winston-error-format'
 
 import { testError } from './helpers/main.test.js'
 
-import { shortFormat } from 'winston-error-format'
 
 test('Use the stack by default', (t) => {
   t.is(shortFormat().transform(testError).message, testError.stack)
