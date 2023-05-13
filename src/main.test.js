@@ -4,9 +4,10 @@ import { each } from 'test-each'
 import through from 'through2'
 import { MESSAGE } from 'triple-beam'
 import { createLogger, transports, format } from 'winston'
-import { shortFormat, fullFormat } from 'winston-error-format'
 
 import { testError, defaultLevel, testLevel } from './helpers/main.test.js'
+
+import { shortFormat, fullFormat } from 'winston-error-format'
 
 const shortLog = (value, options, level = defaultLevel) => {
   // eslint-disable-next-line fp/no-let
