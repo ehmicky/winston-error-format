@@ -4,7 +4,6 @@ import { shortFormat, fullFormat, validateOptions } from 'winston-error-format'
 
 import { testError } from './helpers/main.test.js'
 
-
 each(
   [
     true,

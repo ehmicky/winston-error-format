@@ -8,7 +8,6 @@ import { shortFormat, fullFormat } from 'winston-error-format'
 
 import { testError, defaultLevel, testLevel } from './helpers/main.test.js'
 
-
 const shortLog = (value, options, level = defaultLevel) => {
   // eslint-disable-next-line fp/no-let
   let lastLog = ''

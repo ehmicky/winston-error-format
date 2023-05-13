@@ -4,7 +4,6 @@ import { shortFormat } from 'winston-error-format'
 
 import { testError } from './helpers/main.test.js'
 
-
 test('Use the stack by default', (t) => {
   t.is(shortFormat().transform(testError).message, testError.stack)
 })
