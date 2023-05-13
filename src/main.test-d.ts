@@ -1,5 +1,6 @@
 import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
 import { createLogger } from 'winston'
+
 import {
   shortFormat,
   fullFormat,
