@@ -67,7 +67,7 @@
     "test-each": "^7.0.0"
   },
   "peerDependencies": {
-    "winston": "^3.11.0"
+    "winston": "^3.13.0"
   },
   "engines": {
     "node": ">=18.18.0"
