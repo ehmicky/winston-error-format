@@ -1,3 +1,10 @@
+# 3.0.1
+
+## Dependencies
+
+- Upgrade internal dependency
+  [`error-serializer`](https://github.com/ehmicky/error-serializer)
+
 # 3.0.0
 
 ## Breaking changes
