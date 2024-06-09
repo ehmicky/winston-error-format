@@ -33,15 +33,8 @@ const serializeError = (value, level, options) => {
   }
 
   const { stack: stackOpt, error } = applyOptions(value, level, options)
-  const object = serialize(error, { shallow: true })
-
-  if (stackOpt) {
-    return object
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  const { stack, ...objectA } = object
-  return objectA
+  const exclude = stackOpt ? undefined : ['stack']
+  return serialize(error, { shallow: true, exclude })
 }
 
 const serializeRecurse = ({ value, parents, level, options }) => {
