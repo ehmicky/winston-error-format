@@ -41,7 +41,6 @@ const validateLevel = (level) => {
   }
 
   if (!LEVELS.has(level)) {
-    // eslint-disable-next-line fp/no-mutating-methods
     const availableLevels = [...LEVELS].sort().join(', ')
     throw new TypeError(
       `Option "level" must not be "${level}" but one of: ${availableLevels}`,
