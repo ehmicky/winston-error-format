@@ -3,11 +3,11 @@ import { serialize } from 'error-serializer'
 import { each } from 'test-each'
 import through from 'through2'
 import { MESSAGE } from 'triple-beam'
-import { createLogger, transports, format } from 'winston'
+import { createLogger, format, transports } from 'winston'
 
-import { testError, defaultLevel, testLevel } from './helpers/main.test.js'
+import { defaultLevel, testError, testLevel } from './helpers/main.test.js'
 
-import { shortFormat, fullFormat } from 'winston-error-format'
+import { fullFormat, shortFormat } from 'winston-error-format'
 
 const shortLog = (value, options, level = defaultLevel) => {
   // eslint-disable-next-line fp/no-let

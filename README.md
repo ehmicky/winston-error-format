@@ -42,7 +42,7 @@ Unlike Winston's default
 Using the [full format](#fullformatoptions).
 
 ```js
-import { createLogger, transports, format } from 'winston'
+import { createLogger, format, transports } from 'winston'
 
 import { fullFormat } from 'winston-error-format'
 
@@ -68,7 +68,7 @@ logger.error(error)
 Using the [short format](#shortformatoptions).
 
 ```js
-import { createLogger, transports, format } from 'winston'
+import { createLogger, format, transports } from 'winston'
 
 import { shortFormat } from 'winston-error-format'
 

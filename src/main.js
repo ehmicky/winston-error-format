@@ -3,7 +3,7 @@ import { format } from 'logform'
 import { LEVEL, MESSAGE } from 'triple-beam'
 
 import { toFullLogObject } from './full.js'
-import { validateOptions, DEFAULT_LEVEL } from './options.js'
+import { DEFAULT_LEVEL, validateOptions } from './options.js'
 import { toShortLogObject } from './short.js'
 
 export { validateOptions }

@@ -1,9 +1,9 @@
-import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
+import { expectAssignable, expectNotAssignable, expectType } from 'tsd'
 import { createLogger } from 'winston'
 
 import {
-  shortFormat,
   fullFormat,
+  shortFormat,
   type Format,
   type Options,
 } from 'winston-error-format'

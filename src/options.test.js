@@ -3,7 +3,7 @@ import { each } from 'test-each'
 
 import { testError } from './helpers/main.test.js'
 
-import { shortFormat, fullFormat, validateOptions } from 'winston-error-format'
+import { fullFormat, shortFormat, validateOptions } from 'winston-error-format'
 
 each(
   [
