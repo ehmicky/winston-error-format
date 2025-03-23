@@ -59,7 +59,7 @@
     "is-plain-obj": "^4.1.0",
     "logform": "^2.7.0",
     "normalize-exception": "^4.0.1",
-    "safe-json-value": "^3.0.0",
+    "safe-json-value": "^3.0.1",
     "triple-beam": "^1.4.1"
   },
   "devDependencies": {
