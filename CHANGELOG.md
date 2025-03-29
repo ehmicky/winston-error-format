@@ -1,3 +1,9 @@
+# 3.0.2
+
+## Documentation
+
+- Improve documentation in `README.md`
+
 # 3.0.1
 
 ## Dependencies
